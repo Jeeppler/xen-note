@@ -51,6 +51,8 @@ host: ~/efi$ ls
 EFI  Image  startup.nsh xen.cfg  xen.efi
 ~~~
 
+Note: On Xen on ARM does not differentiate between `efi` and `non-efi` binary executables. Simply renaming the `xen` executable to `xen.efi` is enough.
+
 ## Misc
 
 - according to: http://www.xenproject.org/help/questions-and-answers/build-xen-on-hikey-board/voted.html
@@ -64,10 +66,12 @@ http://www.gossamer-threads.com/lists/xen/devel/433472
 
 ~~~
 options=dom0_mem=1024M dom0_max_vcpus=8 conswitch=x console=dtuart
-dtuart=/smb/uart [at] f711300
+dtuart=/smb/uart@f711300
 kernel=Image console=hvc root=/dev/mmcblk0p9 rootwait rw 3
 dtb=hi6220-hikey.dtb 
 ~~~
+
+`conswitch=x` - press CTRL+x thre times to switch input between DOM0 and Xen
 
 Login credentials:
 - user:     root
@@ -78,7 +82,11 @@ Console log: (XEN) I/O virtualisation disabled
 
 The UEFI trick seems only to work with an UEFI build from Nov 2015
 
-.nsh -> stands for network shell script
+`.nsh` - stands for network shell script
+
+### What is next?
+
+See [HiKey Xen Build Tools](hikey-xen-build-tools.md) to build the Xen tools.
 
 ## CentOS setting up Xen
 
@@ -134,7 +142,7 @@ Jan 01 02:05:17 localhost xencommons[3167]: /usr/local/lib/xen/bin/qemu-system-i
 ...
 ~~~
 
-With other words libpixman-1.so.0 is not installed. The librarie can be found in the `pixman` RPM package.
+With other words `libpixman-1.so.0` is not installed. The librarie can be found in the `pixman` RPM package.
 
 After installing `pixman` the `xl list` command can be used.
 
