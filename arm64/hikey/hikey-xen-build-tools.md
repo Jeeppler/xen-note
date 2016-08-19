@@ -1,5 +1,7 @@
 # Build xen-tools
 
+:!: Make sure that the Xen and the Xen tool version are identical.
+
 based on:
 - http://wiki.xen.org/wiki/Xen_ARM_with_Virtualization_Extensions/CrossCompiling#Build_arm64_tools
 
@@ -38,6 +40,7 @@ profile=default
 5. Install basic utilities
 
 ~~~
+# cd xen
 # schroot -c jessie-arm64-cross
 (chroot)# apt-get install vim wget sudo less curl
 ~~~
@@ -45,7 +48,7 @@ profile=default
 6. Disable recommends
 
 ~~~
-vim /etc/apt/apt.conf.d/30norecommends
+(chroot)# vim /etc/apt/apt.conf.d/30norecommends
 ~~~
 
 add
@@ -76,10 +79,7 @@ add the architecture
 8. Instal the build dependencies required to build Xen:
 
 ~~~
-(chroot)# apt-get install python gettext uuid-dev libncurses5-dev:arm64
-
-(chroot)# apt-get install libc6-dev:arm64 libncurses-dev:arm64 uuid-dev:arm64 libglib2.0-dev:arm64 libssl-dev:arm64 libssl-dev:arm64 libaio-dev:arm64 libyajl-dev:arm64 python gettext gcc git libpython2.7-dev:arm64 libfdt-dev:arm64 autotools-dev libpixman-1-0-dev:arm64
-(chroot)# exit
+(chroot)# apt-get install libc6-dev:arm64 uuid-dev:arm64 libglib2.0-dev:arm64 libssl-dev:arm64 libssl-dev:arm64 libaio-dev:arm64 libyajl-dev:arm64 python gettext gcc git libpython2.7-dev:arm64 libfdt-dev:arm64 autotools-dev libpixman-1-dev:arm64
 ~~~
 
 9. Cross compile tools:
@@ -91,3 +91,19 @@ add the architecture
 ~~~
 
 You should now have a dist/install directory containing the installed bits which can be copied into your arm64 rootfs. (source: https://wiki.xen.org/wiki/Xen_ARM_with_Virtualization_Extensions/CrossCompiling#Using_sbuild_and_schroot)
+
+# Copy files (install tools)
+
+You should now have a `dist/install` directory in the xen folder containing the installed bits which can be copied into your arm64 rootfs. (source: https://wiki.xen.org/wiki/Xen_ARM_with_Virtualization_Extensions/CrossCompiling#Using_sbuild_and_schroot)
+
+## Troubleshoot
+
+This error occurs if Xen and Xen tool versions are different.
+
+~~~
+# xl create <vm-name>.cfg
+Parsing config from android-6-g2.cfg
+libxl: error: libxl_create.c:562:libxl__domain_make: domain creation fail: Permission denied
+libxl: error: libxl_create.c:899:initiate_domain_create: cannot make domain: -3
+libxl: error: libxl_create.c:562:libxl__domain_make: domain creation fail: Permission denied
+~~~

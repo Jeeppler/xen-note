@@ -31,7 +31,6 @@ host# apt-get install make gcc gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi git l
 ~~~
 host$ git clone git://xenbits.xen.org/xen.git xen
 host$ cd xen
-host: ~/xen$ git checkout RELEASE-4.7.0
 
 host$ make xen XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- DEBUG=y
 ~~~
