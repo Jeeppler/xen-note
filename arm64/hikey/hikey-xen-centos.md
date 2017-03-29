@@ -12,6 +12,7 @@ The instructions are based on:
 # clone the kernel tree
 user@host$ git clone https://github.com/96boards/linux.git 96boards_linux
 user@host$ cd 96boards_linux 
+
 # this is the android-hikey-linaro-4.1 commit mentioned in the article
 user@host: ~/96boards_linux$ git checkout 9e740973c9a71214a5873d2a5de42e5be7522989
 user@host: ~/96boards_linux$ git show HEAD
@@ -34,9 +35,11 @@ make -j24 Image hisilicon/hi6220-hikey.dtb
 
 # Copy files to SD card (FAT format)
 user@host$ wget http://mirror.centos.org/altarch/7/isos/aarch64/CentOS-7-aarch64-rolling.img.xz
+
 # alternatively CentOS-7-aarch64-rootfs-1606.tar.xz could be used
 user@host$ sudo dd if=CentOS-7-aarch64-rolling.img of=/dev/sdX bs=4M
 user@host$ mkdir efi
+
 # mount efi FAT partition to efi
 user@host$ sudo mount /dev/sdX1 efi
 user@host$ cd 96board_linux
@@ -46,6 +49,7 @@ host: ~$ cd xen
 host: ~/xen$ cp xen/xen ../efi
 host: ~/xen$ cd ../efi
 host: ~$ mv xen xen.efi
+
 #startup.nsh and xen.cfg is from the wiki article
 host: ~/efi$ ls 
 EFI  Image  startup.nsh xen.cfg  xen.efi

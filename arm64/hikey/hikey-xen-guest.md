@@ -26,14 +26,17 @@ Links manual guest creation:
   - [Fedora Cloud Images](https://ftp-stud.hs-esslingen.de/pub/fedora-secondary/releases/24/CloudImages/aarch64/images/)
   - [Fedora Server](https://ftp-stud.hs-esslingen.de/pub/fedora-secondary/releases/24/Server/)
 
-
 # Guest console
 
-CTRL+]
+`CTRL` + `]`
 
-german layout: STRG+ALT GR+]
+german layout: `STRG` + `ALT GR` + `]`
 
-# Creating OpenEmbedded PV-Guest (tiny guest)
+# Xen on ARM Guest Types
+
+There is only one Xen guest type on ARM. This is very different from Xen on x86. The ARM Xen guest uses ARM virtualization extensions. With other words Xen on ARM guests use hardware assistet virtualization. Paravirtualization is only used for I/O.
+
+# Creating OpenEmbedded Guest (tiny guest)
 
 following this instructions: https://wiki.linaro.org/LEG/Engineering/Virtualization/Xen_on_ARMv8_Foundation#Create_a_DomU_guest.2C_boot_and_test
 
@@ -80,7 +83,7 @@ host# umount /mnt
 config file:
 
 ~~~
-# OpenEmbedded PV DomU
+# OpenEmbedded DomU
 
 # Kernel paths for install
 kernel="/opt/vms/openembedded/linux-kernel-xen"
@@ -101,23 +104,24 @@ disk = [
 The config file can have any name, but the following conventions are used:
 - config files end with `.cfg`
 - config files are named like the machine
-- the suffix `pv`, `hvm`, `pvh` etc. indicates the Xen vm type
 
 3. Start VM
 
 ~~~
-# xl create /etc/xen/openembedded-pv.cfg
+# xl create /etc/xen/openembedded.cfg
 # xl list
 # xl console openembedded 
 ~~~
 
 - `openembedded` is the vm name
 
-# Creating CentOS PV-Guest
+# Creating CentOS Guest
 
 
 
-# Creating Android PV-Guest
+# Creating Android Guest
+
+:!: Does not work!
 
 ## General
 

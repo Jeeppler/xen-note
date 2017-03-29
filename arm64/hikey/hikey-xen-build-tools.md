@@ -2,6 +2,8 @@
 
 :!: Make sure that the Xen and the Xen tool version are identical.
 
+OCaml is used to build oxenstored. Otherwise cxenstored is build and used.
+
 based on:
 - http://wiki.xen.org/wiki/Xen_ARM_with_Virtualization_Extensions/CrossCompiling#Build_arm64_tools
 
@@ -60,10 +62,10 @@ based on:
 
 7. Add architecture
 
-    Cross-toolchains for jessie are available, only cross-binutils and cross-gcc-dev (crosstoolchain builder package) are in the main archive. Other packages come from an external repository. (source: https://wiki.debian.org/CrossToolchains)
+    Cross-toolchains for jessie are available, only cross-binutils and cross-gcc-dev (crosstoolchain builder package) are in the main archive. Other packages are from an external repository. (source: https://wiki.debian.org/CrossToolchains)
 
     ~~~
-    (chroot)# vim /etc/apt/sources.list.d/crsstools.list
+    (chroot)# vim /etc/apt/sources.list.d/crosstools.list
     deb http://emdebian.org/tools/debian/ jessie main
     (chroot)# curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | sudo apt-key add -
     ~~~
@@ -79,10 +81,16 @@ based on:
 8. Instal the build dependencies required to build Xen:
 
     ~~~
-    (chroot)# apt-get install libc6-dev:arm64 uuid-dev:arm64 libglib2.0-dev:arm64 libssl-dev:arm64 libssl-dev:arm64 libaio-dev:arm64 libyajl-dev:arm64 python gettext gcc git libpython2.7-dev:arm64 libfdt-dev:arm64 autotools-dev libpixman-1-dev:arm64
+    (chroot)# apt-get install libc6-dev:arm64 uuid-dev:arm64 libglib2.0-dev:arm64 libssl-dev:arm64 libssl-dev:arm64 libaio-dev:arm64 libyajl-dev:arm64 python gettext gcc git libpython2.7-dev:arm64 libfdt-dev:arm64 autotools-dev libpixman-1-dev:arm64 iasl libncurses5-dev:arm64
     ~~~
 
-9. Cross compile tools:
+9. Optional: Install Dependencies
+
+    ~~~
+    (chroot)# apt-get install ocaml camlp4 bison flex ocaml-findlib pandoc e2fslibs-dev:arm64 markdown fig2ps
+    ~~~ 
+
+10. Cross compile tools:
 
     ~~~
     (chroot)# export pixman_LIBS="libpixman-1-0-dev"
