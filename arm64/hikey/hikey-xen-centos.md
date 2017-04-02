@@ -34,7 +34,9 @@ user@host: ~/96board_linux$ mv config-hikey .config
 make -j24 Image hisilicon/hi6220-hikey.dtb
 
 # Copy files to SD card (FAT format)
+
 user@host$ wget http://mirror.centos.org/altarch/7/isos/aarch64/CentOS-7-aarch64-rolling.img.xz
+user@host$ unxz CentOS-7-aarch64-rolling.img.xz
 
 # alternatively CentOS-7-aarch64-rootfs-1606.tar.xz could be used
 user@host$ sudo dd if=CentOS-7-aarch64-rolling.img of=/dev/sdX bs=4M
@@ -105,6 +107,7 @@ List of mssing libraries:
 - `libyajl`
 - `pixman`
 - `net-tools`
+- `socat`
 
 CentOS 7 Aarch64 Packages: http://buildlogs.centos.org/centos/7/os/aarch64/Packages/
 

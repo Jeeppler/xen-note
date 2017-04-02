@@ -75,13 +75,13 @@ based on:
     ~~~
     (chroot)# dpkg --add-architecture arm64
     (chroot)# apt-get update
-    (chroot)# apt-get install crossbuild-essential-arm64
+    (chroot)# apt-get install crossbuild-essential-arm64 # apt-get install -t testing crossbuild-essential-arm64
     ~~~
 
 8. Instal the build dependencies required to build Xen:
 
     ~~~
-    (chroot)# apt-get install libc6-dev:arm64 uuid-dev:arm64 libglib2.0-dev:arm64 libssl-dev:arm64 libssl-dev:arm64 libaio-dev:arm64 libyajl-dev:arm64 python gettext gcc git libpython2.7-dev:arm64 libfdt-dev:arm64 autotools-dev libpixman-1-dev:arm64 iasl libncurses5-dev:arm64
+    (chroot)# apt-get install libc6-dev:arm64 uuid-dev:arm64 libglib2.0-dev:arm64 libssl-dev:arm64 libssl-dev:arm64 libaio-dev:arm64 libyajl-dev:arm64 python gettext gcc git libpython2.7-dev:arm64 libfdt-dev:arm64 autotools-dev libpixman-1-dev:arm64 iasl libncurses5-dev:arm64 libtinfo5:arm64
     ~~~
 
 9. Optional: Install Dependencies
